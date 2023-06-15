@@ -1,7 +1,7 @@
 from flask import Flask,request,json
 from flask_restful import Api, Resource
 from flask_sqlalchemy import SQLAlchemy
-
+import json
 import logging 
 logging.basicConfig(level=logging.INFO )
 
@@ -23,8 +23,12 @@ class WorkStack(Resource):
         db.session.add(w)
         db.session.commit()
         return {"dataAdded":f"{request.json['desc']}" , "status":"Success"}
-        # workdb:WorkDB=WorkDB(sl=lastKey+1,desc=request.json())
 
+    def get(self):
+        data= [work.desc for work in WorkDB.query.all()]
+        logging.info(f"{data}")
+        jData=json.dumps({"dataAdded":data , "status":"Success"})
+        return jData
 
 api.add_resource(WorkStack,"/")
 if(__name__=="__main__"):
