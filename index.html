@@ -36,11 +36,17 @@
         function jelloRemove(ele){ele.classList.remove("jello-horizontal");}
 
         async function apiCall() {
-        const rawData = await getDB();
-        const jsonData = JSON.parse(rawData); // Parse the JSON string to convert it into an array
-        jsonData.dataAdded.forEach((element) => addRow(1,element))
-
-
+        try{
+            const rawData = await getDB();
+            const jsonData = JSON.parse(rawData); // Parse the JSON string to convert it into an array
+            console.log(jsonData.dataAdded)
+<!--            jsonData.dataAdded.foreach(item => console.log(item,jsonData.dataAdded[item])-->
+            for (let key in jsonData.dataAdded) {addRow(key, jsonData.dataAdded[key]);}
+            }
+            catch(error){
+                alert('Error:Check if the Server is Running')
+                console.log("Error: "+error);
+            }
         }
       async  function addRow(slNo,Work){
   					 tableRow = document.getElementById("currentStackTable");

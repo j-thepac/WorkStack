@@ -25,7 +25,7 @@ class WorkStack(Resource):
         return {"dataAdded":f"{request.json['desc']}" , "status":"Success"}
 
     def get(self):
-        data= [work.desc for work in WorkDB.query.all()]
+        data= {work.sl:work.desc for work in WorkDB.query.all()}
         logging.info(f"{data}")
         jData=json.dumps({"dataAdded":data , "status":"Success"})
         return jData
