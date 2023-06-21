@@ -40,7 +40,6 @@
             const rawData = await getDB();
             const jsonData = JSON.parse(rawData); // Parse the JSON string to convert it into an array
             console.log(jsonData.dataAdded)
-<!--            jsonData.dataAdded.foreach(item => console.log(item,jsonData.dataAdded[item])-->
             for (let key in jsonData.dataAdded) {addRow(key, jsonData.dataAdded[key]);}
             }
             catch(error){
@@ -62,18 +61,25 @@
 
                      cell3 = row.insertCell(-1);
   					 cell3.setAttribute("class", cellClass);
-  					 btn=getDeleteButton()
+  					 btn=getDeleteButton(slNo,"delete_")
                      cell3.appendChild(btn);
   					 }
 
-  		  function getDeleteButton(){
+  		  function getDeleteButton(id,prefix=""){
                       dBtn = document.createElement("a");
                       delClass="text-blue-500 hover:text-blue-700";
                       dBtn.innerHTML = "delete";
                       dBtn.setAttribute("class", delClass);
-                      dBtn.setAttribute("href", "#");
+                      dBtn.setAttribute("id", prefix+id);
+                      dBtn.setAttribute("onclick", deleteRecord(this));
                       return dBtn;
   		  }
+        async function deleteRecord(this){
+          payload={method:"POST"}
+          data=await fetch("http://0.0.0.0:4321/delete/"+this.id)
+          console.log(data)
+        }
+
 
       </script>
 </head>

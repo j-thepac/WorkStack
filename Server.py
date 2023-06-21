@@ -30,7 +30,23 @@ class WorkStack(Resource):
         jData=json.dumps({"dataAdded":data , "status":"Success"})
         return jData
 
+class WorkStackDelete(Resource):
+    def post(self,sl):
+        try:
+            WorkDB.query.filter_by(sl=sl).delete()
+            db.session.commit()
+            return "Success"
+        except Exception as e:
+            logging.exception(e)
+            return "Failure"
+
+
+
+
 api.add_resource(WorkStack,"/")
+api.add_resource(WorkStackDelete,"/delete/<int:sl>")
+
+
 if(__name__=="__main__"):
     app.app_context().push()
     db.create_all()
