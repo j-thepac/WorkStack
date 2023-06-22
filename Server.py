@@ -19,7 +19,7 @@ class WorkStack(Resource):
     def post(self):
         lastKey=len(WorkDB.query.all())
         logging.info(f"{request.json}")
-        w:WorkDB=WorkDB(sl=lastKey,desc=request.json["desc"])
+        w:WorkDB=WorkDB(sl=lastKey+1,desc=request.json["desc"])
         db.session.add(w)
         db.session.commit()
         return {"dataAdded":f"{request.json['desc']}" , "status":"Success"}

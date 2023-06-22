@@ -35,7 +35,7 @@
         function jello(ele){ele.classList.add('jello-horizontal');}
         function jelloRemove(ele){ele.classList.remove("jello-horizontal");}
 
-        async function apiCall() {
+        async function apiCallPullDataToTable() {
         try{
             const rawData = await getDB();
             const jsonData = JSON.parse(rawData); // Parse the JSON string to convert it into an array
@@ -74,17 +74,16 @@
                       dBtn.setAttribute("onclick", deleteRecord(this));
                       return dBtn;
   		  }
-        async function deleteRecord(this){
+        async function deleteRecord(ele){
           payload={method:"POST"}
-          data=await fetch("http://0.0.0.0:4321/delete/"+this.id)
+          data=await fetch("http://0.0.0.0:4321/delete/"+ele.id, payload)
           console.log(data)
+          document.getElementById("currentStackTable").deleteRow(this.id);
         }
 
 
       </script>
 </head>
-
-
 
 
 
@@ -133,7 +132,7 @@
 
   </div>
       <div class="flex md:mt-4 mt-6">
-        <button class="inline-flex text-white bg-indigo-500 border-0 py-1 px-4 focus:outline-none hover:bg-indigo-600 rounded" onclick="apiCall()" id="test">Add</button>
+        <button class="inline-flex text-white bg-indigo-500 border-0 py-1 px-4 focus:outline-none hover:bg-indigo-600 rounded" onclick="apiCallPullDataToTable()" id="test">Add</button>
       </div>
 </section>
 
