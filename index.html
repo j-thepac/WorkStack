@@ -15,10 +15,10 @@
 
 <body>
 
-    <header class="text-gray-600 body-font">
-        <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
-          <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
-            <img src="Banner.png"  onmouseenter="jello(this)" onmouseleave="jelloRemove(this)"/>
+    <header class="text-gray-600 body-font " >
+        <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center justify-center" >
+          <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0 " >
+            <img src="Banner.png"   onmouseenter="jello(this)" onmouseleave="jelloRemove(this)"/>
             <!-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full" viewBox="0 0 24 24">
               <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path> -->
             <!-- </svg> -->
@@ -26,8 +26,6 @@
           </a>
         </div>
       </header>
-
-
 
 
 <section class="text-gray-600 body-font">
@@ -43,7 +41,7 @@
         <div class="-m-1.5 overflow-x-auto">
           <div class="p-1.5 min-w-full inline-block align-middle">
             <div class="overflow-hidden">
-              <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700" id="currentStackTable">
+              <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700 styled-table" id="currentStackTable">
                 <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
 
                 </tbody>
@@ -58,9 +56,6 @@
     </div>
 
   </div>
-      <div class="flex md:mt-4 mt-6">
-        <button class="inline-flex text-white bg-indigo-500 border-0 py-1 px-4 focus:outline-none hover:bg-indigo-600 rounded" onclick="apiCallPullDataToTable()" id="test">Add</button>
-      </div>
 </section>
 
   <section class="text-gray-600 body-font">
@@ -86,14 +81,16 @@
 
     <footer class="text-gray-600 body-font">
         <div class="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col tracking-in-expand">
+
           <a class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full" viewBox="0 0 24 24">
+            <img src="Banner.png"  fill="none" stroke="currentColor" " viewBox="0 0 24 24" class="object-scale-down h-12 w-24"/>
+
+            <!-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full" viewBox="0 0 24 24">
               <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-            </svg>
-            <span class="ml-3 text-xl">WorkStack</span>
+            </svg> -->
+            <!-- <span class="ml-3 text-xl">WorkStack</span> -->
           </a>
-          <p class="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">© 2020 Tailblocks —
-            <a href="https://github/j.thepac" class="text-gray-600 ml-1" rel="noopener noreferrer" target="_blank">j.thepac</a>
+          <p class="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4" >j.thepac.gmail.com
           </p>
           <span class="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
             <a class="text-gray-500">

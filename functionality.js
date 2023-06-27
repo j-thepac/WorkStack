@@ -1,5 +1,6 @@
 
 const endpoint= "http://0.0.0.0:4321/"
+apiCallPullDataToTable()
 
 function checkWorkDesc(){
         data=document.getElementById("WorkDesc").value
