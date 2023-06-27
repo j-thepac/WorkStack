@@ -42,7 +42,6 @@ class WorkStackDelete(Resource):
 
 
 
-
 api.add_resource(WorkStack,"/")
 api.add_resource(WorkStackDelete,"/delete/<int:sl>")
 
@@ -50,4 +49,4 @@ api.add_resource(WorkStackDelete,"/delete/<int:sl>")
 if(__name__=="__main__"):
     app.app_context().push()
     db.create_all()
-    app.run(host="0.0.0.0",port="4321")
+    app.run(host="localhost",port="4321")

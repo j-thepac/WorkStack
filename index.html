@@ -9,82 +9,8 @@
     <link rel="stylesheet" href="style.css" />
     <title>WorkStack</title>
       <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
-
-      <script>
-        function checkWorkDesc(){
-            data=document.getElementById("WorkDesc").value
-            if(data==""){
-              alert("Please add description")
-              return
-        }else
-        upDateDB()
-      }
-        async function upDateDB(){
-          workDesc=document.getElementById("WorkDesc").value;
-          payload = {method: "POST",headers: {'Content-Type': 'application/json'},body: JSON.stringify({desc: workDesc})};
-          resp = await fetch("http://0.0.0.0:4321/", payload);
-          data= await resp.json();
-          console.log( data);
-        }
-        async function getDB(){
-            resp = await fetch("http://0.0.0.0:4321/",{method: "GET"});
-            data= await resp.json();
-            return data;
-        }
-
-        function jello(ele){ele.classList.add('jello-horizontal');}
-        function jelloRemove(ele){ele.classList.remove("jello-horizontal");}
-
-        async function apiCallPullDataToTable() {
-        try{
-            const rawData = await getDB();
-            const jsonData = JSON.parse(rawData); // Parse the JSON string to convert it into an array
-            console.log(jsonData.dataAdded)
-            for (let key in jsonData.dataAdded) {addRow(key, jsonData.dataAdded[key]);}
-            }
-            catch(error){
-                alert('Error:Check if the Server is Running')
-                console.log("Error: "+error);
-            }
-        }
-      async  function addRow(slNo,Work){
-  					 tableRow = document.getElementById("currentStackTable");
-  					 cellClass="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200";
-  					 row = tableRow.insertRow(-1);
-  					 cell1 = row.insertCell(-1);
-  					 cell1.setAttribute("class", cellClass);
-  					 cell1.innerHTML = slNo;
-
-  					 cell2 = row.insertCell(-1);
-  					 cell2.setAttribute("class", cellClass);
-  					 cell2.innerHTML = Work;
-
-                     cell3 = row.insertCell(-1);
-  					 cell3.setAttribute("class", cellClass);
-  					 btn=getDeleteButton(slNo,"delete_")
-                     cell3.appendChild(btn);
-  					 }
-
-  		  function getDeleteButton(id,prefix=""){
-                      dBtn = document.createElement("a");
-                      delClass="text-blue-500 hover:text-blue-700";
-                      dBtn.innerHTML = "delete";
-                      dBtn.setAttribute("class", delClass);
-                      dBtn.setAttribute("id", prefix+id);
-                      dBtn.setAttribute("onclick", deleteRecord(this));
-                      return dBtn;
-  		  }
-        async function deleteRecord(ele){
-          payload={method:"POST"}
-          data=await fetch("http://0.0.0.0:4321/delete/"+ele.id, payload)
-          console.log(data)
-          document.getElementById("currentStackTable").deleteRow(this.id);
-        }
-
-
-      </script>
+      <script src="functionality.js"></script>  
 </head>
-
 
 
 <body>
@@ -92,10 +18,11 @@
     <header class="text-gray-600 body-font">
         <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
           <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full" viewBox="0 0 24 24">
-              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-            </svg>
-            <span class="ml-3 text-xl">WorkStack</span>
+            <img src="Banner.png"  onmouseenter="jello(this)" onmouseleave="jelloRemove(this)"/>
+            <!-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full" viewBox="0 0 24 24">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path> -->
+            <!-- </svg> -->
+            <!-- <span class="ml-3 text-xl">WorkStack</span> -->
           </a>
         </div>
       </header>
@@ -107,7 +34,7 @@
   <div class="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
 
     <div class="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
-      <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">Current Stack</h1>
+      <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900 tracking-in-expand">Current Stack</h1>
     </div>
 
     <div class="md:w-3/5 md:px-1">
@@ -140,12 +67,12 @@
   <div class="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
 
     <div class="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
-      <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">Add Your Work</h1>
+      <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900 tracking-in-expand">Add Your Work</h1>
     </div>
 
     <div class="md:w-3/5 md:px-1">
       <div class="relative mb-4">
-          <label for="message" class="leading-7 text-sm text-gray-600">Work Description</label>
+          <label for="message" class="leading-7 text-sm text-gray-600 ">Work Description</label>
           <textarea id="WorkDesc" name="message" class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"></textarea>
         </div>
       <div class="flex md:mt-4 mt-6">
@@ -157,11 +84,8 @@
 
 
 
-
-
-
     <footer class="text-gray-600 body-font">
-        <div class="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
+        <div class="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col tracking-in-expand">
           <a class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full" viewBox="0 0 24 24">
               <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
